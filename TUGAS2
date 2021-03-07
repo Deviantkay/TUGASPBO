@@ -1,0 +1,162 @@
+package tugas2pbo;
+
+import java.util.*;
+/**
+ *
+ * @author Deviant Kay
+ */
+public class TUGAS2PBO {
+    public static void main(String[] args) {
+        //PENGGUNAAN STATIC/CLASS MEMBER HANYA UNTUK MEMBUAT CODINGAN MENJADI SEDIKIT LEBIH RAPI DAN TIDAK MEMBUAT CODINGAN SULIT DIPAHAMI
+        
+        // Jawaban Tanpa Pengembangan    
+        System.out.println("JAWABAN NO 1===============================================+");
+        nonpengembanganno1();
+        System.out.println("===========================================================+");
+        System.out.println("\n\n");
+        System.out.println("JAWABAN NO 2===============================================+");
+        nonpengembanganno2();
+        System.out.println("===========================================================+");
+        System.out.println("\n\n");
+        
+        //Pengembangan Jawaban Dari Soal no 1
+        System.out.println("PENGEMBANGAN JAWABAN NO 1==================================+");
+        pengembanganno1();
+        System.out.println("===========================================================+");
+    }
+    
+    //TANPA PENGEMBANGAN
+    private static void nonpengembanganno1(){
+        //Instance Variable that going to be a Holder of Human names and ages
+        Human tanpa1 = new Human("Sammi Aldhi",19); //name : Sammi Aldhi, Age : 19
+        Human tanpa2 = new Human("Adidtiya Putra",19); //name : Adidtiya Putra, Age : 19
+        Human tanpa3 = new Human("Zuhrie Febrie Adi",19); //name : Zuhrie Febrie Adi, Age : 19
+        Human tanpa4 = new Human("Wisnu Suprapto",20); //name : Wisnu Suprapto, Age : 19
+        
+        //Call For Walking and Talking Functions Which have been held by variable instances 
+        tanpa1.walk();
+        tanpa1.talk();
+        System.out.println(); //SPACE
+        tanpa2.walk();
+        tanpa2.talk();
+        System.out.println(); //SPACE
+        tanpa3.walk();
+        tanpa3.talk();
+        System.out.println(); //SPACE
+        tanpa4.walk();
+        tanpa4.talk();
+    }
+    private static void nonpengembanganno2(){
+        Student Adidtiya = new Student();
+        Student Sammi = new Student();
+        
+        //INPUT NILAI PELAJAR PERTAMA
+        Adidtiya.input(100);
+        Adidtiya.input(90);
+        Adidtiya.input(90);
+        Adidtiya.input(88);
+        Adidtiya.input(97);
+
+        //INPUT NILAI PELAJAR KEDUA
+        Sammi.input(100);
+        Sammi.input(96);
+        Sammi.input(97);
+        Sammi.input(97);
+        Sammi.input(100);
+        Sammi.input(88);
+
+        //
+        System.out.println("Jumlah input score Pelajar Pertama      : " + Adidtiya.getCountScore()); //MENGHITUNG JUMLAH NILAI YANG DIMASUKKAN
+        System.out.println("Total score Pelajar Pertama             : " + Adidtiya.getScore()); //MENGHITUNG TOTAL NILAI
+        System.out.println("Rata-rata Pelajar Pertama               : " + Adidtiya.calculateAve()); //MENGHITUNG RATA-RATA NILAI 
+        System.out.println("Pembulatan Rata-rata Pelajar Pertama    : " + Adidtiya.roundcalculate()); //PEMBULATAN NILAI RATA-RATA
+        System.out.println("\n");
+        
+        System.out.println("Jumlah input score Pelajar Kedua        : " + Sammi.getCountScore()); //MENGHITUNG JUMLAH NILAI YANG DIMASUKKAN
+        System.out.println("Total score Pelajar Kedua               : " + Sammi.getScore()); //MENGHITUNG TOTAL NILAI
+        System.out.println("Rata-rata Pelajar Kedua                 : " + Sammi.calculateAve()); //MENGHITUNG RATA-RATA NILAI 
+        System.out.println("Pembulatan Rata-rata Pelajar Kedua      : " + Sammi.roundcalculate()); //PEMBULATAN NILAI RATA-RATA
+    }
+    
+    //DENGAN PENGEMBANGAN
+    private static void pengembanganno1(){
+        int A, total;
+        String B;
+        Scanner check = new Scanner (System.in);
+        
+        System.out.print("Masukkan Total Perulangan : ");
+        total = check.nextInt();
+        do{
+            check.nextLine();
+            System.out.print("Masukkan Nama : ");
+            B = check.nextLine();
+            System.out.print("Masukkan Umur : ");
+            A = check.nextInt();
+            System.out.println("\n_________________JAWABAN_________________\n");
+            Human Coba = new Human(B,A);
+            Coba.walk();
+            Coba.developtmentalk();
+            System.out.println("\n_________________________________________\n");
+            total--;
+        }
+        while (total != 0);
+        
+    }
+
+}
+
+
+//CLASS HUMAN
+class Human{
+    private final String Name;
+    private final int Age;
+    
+    Human(String Name, int Age){
+        this.Name = Name;
+        this.Age = Age;
+    }
+    
+    void walk(){
+        System.out.println("Human ( " + this.Name + " ) is Walking");
+    }
+    void talk(){
+        System.out.println("Human ( " + this.Name + " ) is Talking");
+    }
+    
+    // Bagian Talk Yang Sudah dikembangkan untuk menjadi pembeda
+    void developtmentalk(){
+        System.out.println(this.Name + " is Talking About " + this.Age);
+    }
+}
+
+//CLASS STUDENT
+class Student{
+    private double score;
+    private int count;
+
+    // get score
+    public double getScore() {
+        return score;
+    }
+
+    // get CountInputScore
+    public int getCountScore() {
+        return count;
+    }
+
+    // A void input() function that assign the score to the variable
+    void input(double score) {
+        this.count++;
+        this.score += score;
+    }
+
+    // A double calculateAve() function that compute and return average of score
+    double calculateAve() {
+        return this.score / count;
+    }
+    
+    // A double of round calculateAve() function that compute and return round of average of score
+    double roundcalculate(){
+        return Math.round(calculateAve());
+    }
+}
