@@ -82,25 +82,33 @@ public class TUGAS2PBO {
     private static void pengembanganno1(){
         int A, total;
         String B;
-        Scanner check = new Scanner (System.in);
-        
+        Scanner checkA = new Scanner (System.in);
+        Scanner checkB = new Scanner (System.in);
+
+        List<Human> humanList = new ArrayList();
+
         System.out.print("Masukkan Total Perulangan : ");
-        total = check.nextInt();
-        do{
-            check.nextLine();
+        total = checkA.nextInt();
+
+        for (int i = 1; i <= total ; i++) {
+
             System.out.print("Masukkan Nama : ");
-            B = check.nextLine();
+            B = checkB.nextLine();
+
             System.out.print("Masukkan Umur : ");
-            A = check.nextInt();
-            System.out.println("\n_________________JAWABAN_________________\n");
+            A = checkA.nextInt();
+
             Human Coba = new Human(B,A);
-            Coba.walk();
-            Coba.developtmentalk();
+            humanList.add(Coba);
             System.out.println("\n_________________________________________\n");
-            total--;
         }
-        while (total != 0);
-        
+
+        humanList.forEach(result -> {
+            System.out.println("---------");
+            result.walk();
+            result.talk();
+            System.out.println("---------");
+        });
     }
 
 }
