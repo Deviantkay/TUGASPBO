@@ -1,0 +1,219 @@
+package tugas3pbo;
+/*
+    BY ADIDTIYA PUTRA CANIAGO
+    2003113945
+    SISTEM INFORMASI A
+*/
+
+//import utility yang akan dipakai dalam program ini
+import java.util.*;
+
+public class TUGAS3PBO {
+    public static void main(String[] args) {
+        //Deklarasi Variabel untuk input
+        String Nama, Nim, Prodi, Jurusan, Email, beasiswa;
+        boolean Beasiswa = false;
+        int Angkatan, total;
+        Scanner checkA = new Scanner (System.in); //Untuk INT
+        Scanner checkB = new Scanner (System.in); //Untuk String
+        
+        
+        List<Mahasiswa> Mahalist = new ArrayList(); //Array untuk membuat data yang dimasukkan tidak tertimpa
+        
+        System.out.print("Masukkan Total Data Yang Dimasukkan : ");
+        total = checkA.nextInt();
+        
+        System.out.println("\n\n");
+        for (int i = 1; i <= total ; i++) {
+            System.out.println("________________MASUKKAN DATA________________");
+            //Memasukkan Nama
+            System.out.print("Masukkan Nama : ");
+            Nama = checkB.nextLine();
+            
+            //Memasukkan Nim
+            System.out.print("Masukkan Nim : ");
+            Nim = checkB.nextLine();
+            
+            //Memasukkan Prodi dan menentukan Jurusan
+            System.out.print("Masukkan Prodi : ");
+            Prodi = checkB.nextLine();
+            Prodi.toUpperCase(); //Untuk Caps seluruh huruf
+            
+            if("SI".equals(Prodi) | "SISTEM INFORMASI".equals(Prodi)){
+                Prodi = "Sistem Informasi";
+                Jurusan = "ILMU KOMPUTER";
+            }
+            else if("MI".equals(Prodi) | "MANAJEMEN INFORMATIKA".equals(Prodi)){
+                Prodi = "Manajemen Informatika";
+                Jurusan = "ILMU KOMPUTER";
+            }
+            else {
+                Prodi.toUpperCase();
+                System.out.print("Masukkan Jurusan : ");
+                Jurusan = checkB.nextLine();
+            }
+            
+            //Memasukkan Angkatan
+            System.out.print("Masukkan Angkatan : ");
+            Angkatan = checkB.nextInt();
+            
+            //Memasukkan Email
+            checkB.nextLine();
+            System.out.print("Masukkan Email : ");
+            Email = checkB.nextLine();
+            
+            //Memasukkan beasiswa
+            System.out.print("Apakah Memiliki Suatu Beasiswa? (Y / T) :");
+            beasiswa = checkB.nextLine();
+            beasiswa.toUpperCase(); //Untuk Caps seluruh huruf
+            
+            //Menentukan Beasiswa bernilai True / False
+            if("YA".equals(beasiswa) | "Y".equals(beasiswa)){
+                Beasiswa = true;
+            }
+            
+            Mahasiswa Masukkandata = new Mahasiswa(Nama, Nim, Prodi, Jurusan, Angkatan, Email, Beasiswa);
+            Mahalist.add(Masukkandata);
+            
+            System.out.println("\n");
+        }
+        
+        System.out.println("______________________Jawaban____________________");
+        
+        Mahalist.forEach((Mahasiswa result) -> {    
+            result.Hasil();
+            System.out.println("_______________________________________________");
+        });
+        
+        int perkiraan = total;
+        if (Mahasiswa.getTotalMahasiswa() == perkiraan) {
+            System.out.println("total mahasiswa : " + Mahasiswa.getTotalMahasiswa());
+       }
+    }
+}
+
+class Mahasiswa {
+
+    // Static or Class members
+    private static int totalMahasiswa = 1;
+    
+    // Instance members
+    private String nama;
+    private String nim;
+    private String prodi;
+    private String jurusan;
+    private int angkatan;
+    private String email;
+    private boolean beasiswa;
+    
+    // no args constructor
+    Mahasiswa(){
+       Mahasiswa.totalMahasiswa++;
+    }
+
+    // all args constructor
+    public Mahasiswa(String Nama, String Nim, String Prodi, String Jurusan, int Angkatan, String Email, boolean Beasiswa) {
+        this.nama = Nama;
+        this.nim = Nim;
+        this.prodi = Prodi;
+        this.jurusan = Jurusan;
+        this.angkatan = Angkatan;
+        this.email = Email;
+        this.beasiswa = Beasiswa;
+    }
+
+
+    //Untuk Mendapatkan dan menyetel data untuk Static atau Class members
+    public static int getTotalMahasiswa() {
+        return totalMahasiswa-1;
+    }
+    
+    public static void addMahasiswa(int totalMahasiswa) {
+        Mahasiswa.totalMahasiswa += 1;
+    }
+
+    
+    //Untuk Mendapatkan dan menyetel data nama
+    public String getNama() {
+        return nama;
+    }
+    
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    
+    //Untuk Mendapatkan dan menyetel data Nim
+    public String getNim() {
+        return nim;
+    }
+    
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+
+    
+    //Untuk Mendapatkan dan menyetel data Prodi
+    public String getProdi() {
+        return prodi;
+    }
+    
+    public void setProdi(String Prodi) {
+        this.prodi = Prodi;
+    }
+
+    
+    //Untuk Mendapatkan dan menyetel data Jurusan
+    public String getJurusan() {
+        return jurusan;
+    }
+    
+    public void setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+    }
+
+    
+    //Untuk Mendapatkan dan menyetel data Angkatan
+    public int getAngkatan() {
+        return angkatan;
+    }
+    
+    public void setAngkatan(int angkatan) {
+        this.angkatan = angkatan;
+    }
+
+    
+    //Untuk Mendapatkan dan menyetel data Email
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    //Untuk Mendapatkan dan menyetel data Beasiswa
+    public boolean isBeasiswa() {
+        return beasiswa;
+    }
+    
+    public void setBeasiswa(boolean Beasiswa) {
+        this.beasiswa = Beasiswa;
+    }
+
+    // Hasil
+    public String ProsesHasil() {
+        return      "Nama       :         " + nama + "\n" 
+                +   "Nim        :         " + nim + "\n" 
+                +   "Prodi      :         " + prodi + "\n" 
+                +   "Jurusan    :         " + jurusan + "\n" 
+                +   "Angkatan   :         " + angkatan + "\n" 
+                +   "Email      :         " + email + "\n" 
+                +   "Beasiswa   :         " + beasiswa;
+    }
+    
+    void Hasil(){
+        System.out.println(ProsesHasil());
+    }
+}
