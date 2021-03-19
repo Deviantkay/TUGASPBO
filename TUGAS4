@@ -1,0 +1,75 @@
+package tugas4pbo;
+
+/**
+ *
+ * @author Deviant Kay
+ */
+
+import java.math.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+
+public class TUGAS4PBO {
+    public static void main(String[] args) {
+        Bagian A = new Bagian(UUID.randomUUID().toString());
+        Bagian B = new Bagian(UUID.randomUUID().toString());
+        Bagian C = new Bagian(UUID.randomUUID().toString());
+        
+        System.out.println("DATA ACAK KENDARAAN :");
+        
+        System.out.println(A.show());
+        System.out.println(B.show());
+        System.out.println(C.show());
+    }
+}
+
+class Bagian {
+    private String nomor;
+    private String Nama;
+    private BigDecimal harga;
+    private LocalDate STNK;
+    private Category Kategorikendaraan;
+
+    private final String[] kendaraan = {"Mobil", "Sepeda", "Skateboard", "Sepatu Roda", "Motor", "BAJAJ", "Truk", "Bus", "Kereta Api", "Delman", "Pedati"};
+    Random random = new Random();
+    int acak = random.nextInt(kendaraan.length);
+
+    
+    public Bagian(String nomor) {
+        this(nomor, null);
+    }
+
+    public Bagian(String nomor, String barang) {
+        this(nomor, barang, new BigDecimal(500000));
+    }
+
+    public Bagian(String nomor, String Nama, BigDecimal harga) {
+        this(nomor, Nama, harga, LocalDate.now().plus(5, ChronoUnit.YEARS));
+    }
+
+    public Bagian(String nomor, String Nama, BigDecimal harga, LocalDate STNK) {
+        this(nomor, Nama, harga, STNK, Category.Darat);
+    }
+
+    public Bagian(String nomor, String Nama, BigDecimal harga, LocalDate STNK, Category Kategorikendaraan) {
+        this.nomor                  = nomor;
+        this.Nama                   = kendaraan[acak];
+        this.harga                  = harga;
+        this.STNK                   = STNK;
+        this.Kategorikendaraan      = Kategorikendaraan;
+    }
+
+    public String show() {
+        return  "\n"+
+                "  Lisensi Kendaraan        = " + this.nomor    + "\n" +
+                "  Nama                     = " + this.Nama     + "\n" +
+                "  Harga                    = " + this.harga    + "\n" +
+                "  STNK                     = " + this.STNK     + "\n" +
+                "  Kategoti Kendaraan       = " + this.Kategorikendaraan + "\n";
+    }
+}
+
+enum Category {
+    Darat, Laut, Udara
+}
