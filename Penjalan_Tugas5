@@ -1,0 +1,13 @@
+import X.*;
+public class Penjalan_TUGAS5 {
+    public static void main(String[] Args){
+        A a = new A("Adidtiya Putra Caniago", 19, "stackoverflow adalah jalan ninjaku", "laki-laki");
+        C c = new C("Adit", 20, "Teruslah Berkarya meskipun karya mu dihujat, "
+                + "karena akan ada saatnya kamu akan bersinar", "Laki - Laki");
+        
+        System.out.println("NAMA        : " + a.getNameFromA());
+        System.out.println("UMUR        : " + a.getAgeFromA());
+        System.out.println("CAPTION     : " + c.getCaptionFromC());
+        System.out.println("GENDER      : " + c.getGenderFromC());
+    }
+}
