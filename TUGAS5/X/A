@@ -1,0 +1,29 @@
+package X;
+import W.B;
+
+/**
+ *
+ * @author Deviant Kay
+ */
+public class A extends B{
+
+    public A(String name, int age, String caption, String gender) {
+        super(name, age, caption, gender);
+    }
+    
+    public String getNameFromA() {
+        return super.getName();
+    }
+    
+    public int getAgeFromA() {
+        return super.getAge();
+    }
+    
+    public String getCaptionFromA() {
+        return super.getCaption();
+    }
+
+    public String getGenderFromA() {
+        return super.getGender();
+    }
+}
