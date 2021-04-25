@@ -1,0 +1,40 @@
+package Encapsulation;
+
+class Student{
+    private int student_id;
+    private String name;
+    
+    public int getStudent_id(){
+        return student_id;
+    }
+    
+    public void setStudent_id (int student_id){
+        this.student_id=student_id;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public void setName (String name){
+        this.name=name;
+    }
+    
+    @Override
+    public String toString(){
+        return "Nomor : " + student_id + "\nAtas Nama : " + name;
+        
+    }
+}
+
+public class Campus {
+    public static void main(String[] args){
+        Student data_pelajar = new Student();
+        
+        //ISI
+        data_pelajar.setStudent_id(1);
+        data_pelajar.setName("Adit");
+        
+        System.out.println(data_pelajar.toString());
+    }
+}
