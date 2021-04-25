@@ -1,0 +1,170 @@
+package inheritance;
+
+import java.util.*;
+
+/**
+ *
+ * @author Deviant Kay
+ */
+public class Inheritance {
+    public static void main(String[] args) {
+        List<Product> Menu = new ArrayList<>();
+        List<Product> Menu2 = new ArrayList<>();
+        
+        //Menu List
+        Menu.add(new Product("Teh Es Besar",3d)); //0
+        Menu.add(new Product("Teh Panas",5d)); //1
+        Menu.add(new Product("Nasi Goreng",10d)); //2
+        Menu.add(new Product("Mie Goreng",10d)); //3
+        Menu.add(new Product("kurma",5d)); //4
+        Menu.add(new Product("Ayam Lodeh",8d)); //5
+        Menu.add(new Product("Nasi Lemang",8d)); //6
+        Menu.add(new Product("Nasi Uduk",3d)); //7
+        
+        //Penjual
+        Penjual penjual1 = new Penjual();
+        penjual1.username = "Dira";
+        penjual1.password = "DiraLapeer";
+        penjual1.produk = Menu;
+        System.out.println("PENJUAL 1:");
+        penjual1.showProducts();
+
+        //Menu List
+        Menu2.add(new Product("Pecel Lele",10d)); //1
+        Menu2.add(new Product("Sala",1d)); //2
+        Menu2.add(new Product("Kerupuk",2d)); //3
+        Menu2.add(new Product("Es Campur",6d)); //4
+        Menu2.add(new Product("Ayam Geprek",10d)); //5
+        Menu2.add(new Product("Ayam Penyet",10d));//6
+        Menu2.add(new Product("Ikan Nila",15d)); //7
+        Menu2.add(new Product("Ikan Patin",13d)); //8
+        Menu2.add(new Product("Nasi Uduk",3d)); //9
+        Menu2.add(new Product("Pudding",2d)); //10
+        
+        Penjual penjual2 = new Penjual();
+        penjual2.username = "Risky";
+        penjual2.password = "Pecel Lele Pak Risky";
+        penjual2.produk = Menu2;
+        System.out.println("PENJUAL 2:");
+        penjual2.showProducts();
+        
+        System.out.println("-------------------------BAGAN PEMBELI-----------------------");
+
+        
+        //Pembeli
+        Pembeli pembeli = new Pembeli();
+        pembeli.username = "Juanda";
+        pembeli.password = "200Maruanda";
+        pembeli.setSaldo(50d);
+        pembeli.showDetails();
+        
+        //Pembelian
+        pembeli.buy(Menu.get(0));
+        pembeli.showDetails();
+        pembeli.buy(Menu2.get(2));
+        pembeli.showDetails();
+        pembeli.buy(Menu.get(5));
+        pembeli.showDetails();
+        pembeli.buy(Menu2.get(8));
+        pembeli.showDetails();
+        pembeli.buy(Menu.get(4));
+        pembeli.showDetails();
+        pembeli.buy(Menu2.get(9));
+        pembeli.showDetails();     
+        pembeli.buy(Menu.get(3));
+        pembeli.showDetails();
+        pembeli.buy(Menu2.get(2));
+        pembeli.showDetails();
+        pembeli.buy(Menu.get(7));
+        pembeli.showDetails();
+        pembeli.buy(Menu2.get(3));
+        pembeli.showDetails();        
+        pembeli.buy(Menu2.get(7));
+        pembeli.showDetails();
+    }
+}
+
+class Pengguna {
+    protected String username;
+    protected String password;
+}
+
+class Product {
+    private final String name;
+    private final Double price;
+
+    public Product(String name, Double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+}
+
+class Penjual extends Pengguna{
+    public List<Product> produk;
+
+    public void showProducts() {
+        System.out.println("Username : " + username);
+        System.out.println("Password : " + password);
+        produk.forEach(temp -> {
+            System.out.print("\t"+temp.getName() + " -> ");
+            System.out.println(temp.getPrice() + "K");
+        });
+        System.out.println("\n");
+    }
+}
+
+class Pembeli extends Pengguna{
+    private Double saldo;
+    private final List<Product> shoppingList = new ArrayList<>();
+
+    Pembeli() {
+        this.saldo = 0.0;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void buy(Product product) {
+
+        System.out.println("----------------------STATUS PEMBELIAN-----------------------\n");
+        if (this.saldo > product.getPrice()) {
+            this.saldo  -= product.getPrice();
+            this.shoppingList.add(product);
+            System.out.println("\t\t      PEMBELIAN SUKSES!\n");
+        }else {
+            System.out.println("\t\t      PEMBELIAN GAGAL!");
+            System.out.println("\t      SALDO ANDA TIDAK BOLEH TERSISA 0\n");
+        }
+        System.out.println("-------------------------------------------------------------\n");
+    }
+
+    public void showDetails() {
+        System.out.println("Hai! ");
+        System.out.println("Username        : " + username);
+        System.out.println("Password        : " + password);
+        System.out.println("Sisa Saldo Anda : " + saldo + "K");
+        if (shoppingList.isEmpty()) {
+            System.out.println("Shopping list : 0\n");
+            return;
+        }
+        System.out.println("TELAH DIBELI : ");
+        shoppingList.forEach(value -> System.out.println("\t"+value.getName() + " -> " + value.getPrice() +"K"));
+        System.out.println("\n");
+    }
+}
+
+class Grosir extends Penjual {}
+class Ritel extends Penjual{}
